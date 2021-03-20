@@ -155,7 +155,6 @@ namespace BlazorApp9.Server
         }
         public async Task GetProfileDataAsync(ProfileDataRequestContext context)
         {
-            //>Processing
             var user = await _userManager.GetUserAsync(context.Subject);
 
             var claims = new List<Claim>
@@ -166,7 +165,6 @@ namespace BlazorApp9.Server
         }
         public async Task IsActiveAsync(IsActiveContext context)
         {
-            //>Processing
             var user = await _userManager.GetUserAsync(context.Subject);
 
             context.IsActive = (user != null) && true;
