@@ -150,5 +150,12 @@ namespace BlazorApp9.Server.Controllers
         {
             return Ok(context.Accounts.ToList().OrderBy(s => new Random().Next()).Take(10));
         }
+        [HttpPost]
+        public async Task<ActionResult> PostSolutionDesired(SolutionDesired st)
+        {
+            context.Solutions.Add(st);
+            await context.SaveChangesAsync();
+            return Ok();
+        }
     }  
 }
