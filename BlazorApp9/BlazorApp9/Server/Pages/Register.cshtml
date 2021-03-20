@@ -1,0 +1,28 @@
+﻿@page
+@model BlazorApp9.Server.Pages.RegisterModel
+@using Microsoft.AspNetCore.Identity
+@using BlazorApp9.Server.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Register";
+}
+
+<section>
+    <h4>Register</h4>
+    <hr />
+    @{
+        var providers = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+        <form id="external-account" asp-action="ExternalRegister" asp-controller="Account" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+            <div>
+                <p>
+                    @foreach (var provider in Model.ExternalLogins)
+                    {
+                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                    }
+                </p>
+            </div>
+        </form>
+    }
+</section>

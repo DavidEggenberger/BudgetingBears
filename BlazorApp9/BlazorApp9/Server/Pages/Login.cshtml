@@ -1,0 +1,30 @@
+﻿@page
+@model BlazorApp9.Server.Pages.LoginModel
+@using Microsoft.AspNetCore.Identity
+@using BlazorApp9.Server.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Login";
+}
+
+<section>
+    <h4>Use different service for log in:</h4>
+    <hr />
+    @{
+        var providers = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+        <form asp-action="ExternalLogin" asp-controller="account" asp-route-returnurl="@Model.returnUrl" method="post" class="form-horizontal">
+            <div>
+                <p>
+                    @foreach (var provider in providers)
+                    {
+                        <input type="submit" class="btn btn-info" value="@provider.Name" name="provider" />
+                    }
+                </p>
+            </div>
+        </form>
+    }
+    <partial name="PartialInfo" model="@Model.message" />
+</section>

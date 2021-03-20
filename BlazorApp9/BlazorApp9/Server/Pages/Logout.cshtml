@@ -1,0 +1,13 @@
+﻿@page
+@model BlazorApp9.Server.Pages.LogoutModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+}
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <form class="form-inline" method="post">
+        <button type="submit">Click here to Logout</button>
+    </form>
+}

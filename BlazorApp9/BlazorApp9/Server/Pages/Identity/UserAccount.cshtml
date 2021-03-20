@@ -1,0 +1,16 @@
+﻿@page
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@model BlazorApp9.Server.Pages.UserAccountModel
+@{
+    Layout = "_Layout";
+}
+
+
+<h3>Your Account</h3>
+
+<form method="post">
+    @Model.CurrentUser.UserName
+
+    <button type="submit">Update User Profile</button>
+</form>

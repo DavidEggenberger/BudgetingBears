@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA71h3GqeS4UKQpcbOgZDZpQAAAAACAAAAAAAQZgAAAAEAACAAAADp2+blUg6oQtJUrpRUCoEumkqA9yRL+k3xWKE+9zT/pAAAAAAOgAAAAAIAACAAAAAdFCkHwFM7M9MGrtQ4CW+A5fxTXDdGb3NbKNUrsX1X9IAAAAB1qOrHv2NqLgmokYz6xyra9iOy9ByveLaA99rOfabRUyv/SAX+TYf9rKdSFf2GDJW0J2tESq0vbVk8EVwMFxZMKV/Gh828uKl14+gyK4atKVtssGhthJCrm4bCxF11klhoy76dNxFvWthb01Fv4fTkyTbDt0H9EvVk4oQb7/rMbkAAAABvwvHuVQktoLzISwi7mkh5GxBFyK4Lbtavp+C3kJ6V3yeU/75EUVC6UfsoAwKm/QKR7ls1xtQR+gjCdDmrxDYW</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>Data Source=tcp:learningdavid.database.windows.net,1433%3bInitial Catalog=learning%3bUser Id=david.eggenberger%40learningdavid%3bPassword=0311Roger4387Ledger</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+</Project>
