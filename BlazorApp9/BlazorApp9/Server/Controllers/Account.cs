@@ -55,7 +55,7 @@ namespace BlazorApp9.Server.Controllers
         public async Task<IActionResult> ExternalRegisterCallback(string returnUrl = null)
         {
             var info = await _signInManager.GetExternalLoginInfoAsync();
-            if(info is not null)
+            if (info is not null)
             {
                 ApplicationUser user = new ApplicationUser
                 {
@@ -73,5 +73,27 @@ namespace BlazorApp9.Server.Controllers
             }
             return Redirect("/Register");
         }
+        //[HttpGet("ExternalRegisterCallback")]
+        //public async Task<IActionResult> ExternalRegisterCallback(string returnUrl = null)
+        //{
+        //    var info = await _signInManager.GetExternalLoginInfoAsync();
+        //    if (info is not null)
+        //    {
+        //        ApplicationUser user = new ApplicationUser
+        //        {
+        //            Email = info.Principal.Claims.FirstOrDefault(s => s.Type == ClaimTypes.Email)?.Value,
+        //            UserName = info.Principal.Identity.Name
+        //        };
+        //        user.Email ??= "github@email.com";
+        //        var result = await _userManager.CreateAsync(user);
+        //        if (result.Succeeded)
+        //        {
+        //            result = await _userManager.AddLoginAsync(user, info);
+        //            await _signInManager.SignInAsync(user, isPersistent: false, info.LoginProvider);
+        //            return Ok(user.UserName);
+        //        }
+        //    }
+        //    return Redirect("/Register");
+        //}
     }
 }

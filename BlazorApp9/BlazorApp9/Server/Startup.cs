@@ -1,17 +1,23 @@
 using BlazorApp9.Server.Data;
 using BlazorApp9.Server.Models;
 using Data;
+using IdentityServer4.Models;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace BlazorApp9.Server
 {
@@ -60,7 +66,8 @@ namespace BlazorApp9.Server
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>()
+                .AddProfileService<ProfileService>();
 
             services.AddAuthentication()
                 .AddLinkedIn(op => 
@@ -137,6 +144,32 @@ namespace BlazorApp9.Server
                 endpoints.MapControllers();
                 endpoints.MapFallbackToFile("index.html");
             });
+        }
+    }
+    public class ProfileService : IProfileService
+    {
+        protected UserManager<ApplicationUser> _userManager;
+        public ProfileService(UserManager<ApplicationUser> userManager)
+        {
+            _userManager = userManager;
+        }
+        public async Task GetProfileDataAsync(ProfileDataRequestContext context)
+        {
+            //>Processing
+            var user = await _userManager.GetUserAsync(context.Subject);
+
+            var claims = new List<Claim>
+            {
+                new Claim("FullName", user.UserName),
+            };
+            context.IssuedClaims.AddRange(claims);
+        }
+        public async Task IsActiveAsync(IsActiveContext context)
+        {
+            //>Processing
+            var user = await _userManager.GetUserAsync(context.Subject);
+
+            context.IsActive = (user != null) && true;
         }
     }
 }

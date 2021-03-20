@@ -160,6 +160,11 @@ namespace BlazorApp9.Server.Controllers
             await context.SaveChangesAsync();
             return Ok();
         }
-        [HttpPost]
+        //[HttpPost("postcommenttosolution/{id}")]
+        //[Authorize]
+        //public async Task<ActionResult> PostCommentToSolutionDesired(string id)
+        //{
+
+        //}
     }  
 }

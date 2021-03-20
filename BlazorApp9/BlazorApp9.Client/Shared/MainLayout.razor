@@ -1,4 +1,7 @@
 ﻿@inherits LayoutComponentBase
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
 
 <div class="page">
     <div class="sidebar">
@@ -12,7 +15,32 @@
         </div>
 
         <div class="content px-4">
+            @AccessToken
             @Body
         </div>
     </div>
 </div>
+
+@code{
+    public static string Base64Decode(string base64EncodedData)
+    {
+        var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+        return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+    }
+
+    [Inject]
+    IAccessTokenProvider TokenProvider { get; set; }
+
+    public string AccessToken { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var accessTokenResult = await TokenProvider.RequestAccessToken();
+        AccessToken = string.Empty;
+
+        if (accessTokenResult.TryGetToken(out var token))
+        {
+            AccessToken = token.Value;
+        }
+    }
+}
