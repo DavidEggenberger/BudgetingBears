@@ -47,6 +47,15 @@ namespace BlazorApp9.Server.Controllers
             await context.SaveChangesAsync();
             return Ok();
         }
+        [HttpPost("UpVote")]
+        public async Task<ActionResult> Upvote(Dto dt)
+        {
+            var post = context.Posts.Where(s => s.Level1Name == dt.Level1Name).First();
+            post.Votes = new List<Vote>();
+            post.Votes.Add(new Vote { });
+            await context.SaveChangesAsync();
+            return Ok();
+        }
         [HttpGet]
         [Route("level")]
         public async Task<ActionResult> GetLevel(Dto dt)
