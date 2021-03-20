@@ -1,6 +1,7 @@
 ﻿using APITypes;
 using Data;
 using Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -151,11 +152,13 @@ namespace BlazorApp9.Server.Controllers
             return Ok(context.Accounts.ToList().OrderBy(s => new Random().Next()).Take(10));
         }
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult> PostSolutionDesired(SolutionDesired st)
         {
             context.Solutions.Add(st);
             await context.SaveChangesAsync();
             return Ok();
         }
+        [HttpPost]
     }  
 }
