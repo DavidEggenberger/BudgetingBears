@@ -155,6 +155,7 @@ namespace BlazorApp9.Server.Controllers
         [Authorize]
         public async Task<ActionResult> PostSolutionDesired(SolutionDesired st)
         {
+            st.UserName = User.Identity.Name;
             context.Solutions.Add(st);
             await context.SaveChangesAsync();
             return Ok();
